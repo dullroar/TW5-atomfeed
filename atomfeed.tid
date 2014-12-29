@@ -1,0 +1,27 @@
+created: 20141220215103148
+creator: Jim
+modified: 20141229145957207
+modifier: Jim
+tags: static
+title: atomfeed
+type: text/vnd.tiddlywiki
+
+\define tv-wikilink-template() #$uri_encoded$
+\define tv-config-toolbar-icons() no
+\define tv-config-toolbar-text() no
+\define tv-config-toolbar-class() tc-btn-invisible
+`<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>`{{$:/SiteTitle}}`</title>
+  <subtitle>`{{$:/SiteSubtitle}}`</subtitle>
+  <link href="`{{atomserver}}`atom.xml" rel="self" />
+  <link href="`{{atomserver}}`" />
+  <author>
+  	<name>`{{$:/status/UserName}}`</name>
+  </author>
+  <id>urn:uuid:`<$macrocall $name="md5hashToGuid" input={{$:/SiteTitle}} />`</id>
+  <updated>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="modified" format="date" template="YYYY-MM-DDT0hh:0mm:0ss"/></$link></$list>`</updated>`
+<$set name="exportFilter" value="[!is[system]!untagged[]!tag[static]!title[Table of Contents]!sort[modifed]]">
+{{RenderAtom}}
+</$set>
+`</feed>`

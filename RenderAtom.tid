@@ -1,0 +1,13 @@
+created: 20141221144856475
+creator: Jim
+extension: .xml
+modified: 20141229145352496
+modifier: Jim
+tags: static $:/tags/Exporter
+title: RenderAtom
+type: text/vnd.tiddlywiki
+
+\define renderContent()
+<$text text=<<atomentries filter:"""$(exportFilter)$""">>/>
+\end
+<<renderContent>>
