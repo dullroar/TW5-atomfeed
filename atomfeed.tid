@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
   <link href="`{{atomserver}}`atom.xml" rel="self" />
   <link href="`{{atomserver}}`" />
   <author>
-  	<name>`{{$:/status/UserName}}`</name>
+  	<name>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="creator" format="htmlencoded"/></$link></$list>`</name>
   </author>
   <id>urn:uuid:`<$macrocall $name="md5hashToGuid" input={{$:/SiteTitle}} />`</id>
   <updated>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="modified" format="date" template="YYYY-MM-DDT0hh:0mm:0ss"/></$link></$list>`</updated>`
