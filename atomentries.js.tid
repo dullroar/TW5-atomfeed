@@ -47,7 +47,7 @@ XML.stringify = function(data) {
         // id semantics that the ATOM spec requires. Other crypto hashes like SHA return too
         // many bits for this.
         x += "\t\t\t<id>urn:uuid:" + md5hash.substring(0,8) + "-" + md5hash.substring(8,12) + "-" + md5hash.substring(12,16) + "-" + md5hash.substring(16,20) + "-" + md5hash.substring(20) + "</id>\n";
-        x += "\t\t\t<link href='http://dullroar.com/" + element.title.replace(/ /g,"%20") + ".html' />\n";
+        x += "\t\t\t<link href='http://dullroar.com/" + element.title.replace(/ /g,"%2520") + ".html' />\n";
         x += "\t\t\t<updated>" + XML.twDateToISO8601(element.modified) + "</updated>\n";
         x += "\t\t\t<summary>";
         if(!!element.summary) {
