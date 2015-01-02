@@ -1,8 +1,8 @@
 {
-    "title": "$:/plugins/atomfeed",
+    "title": "$:/plugins/dullroar/atomfeed",
     "description": "TiddlyWiki5 plugin to generate ATOM feed.",
     "author": "Jim Lehmer",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "core-version": ">=5.0.8",
     "source": "https://github.com/dullroar/TW5-atomfeed",
     "plugin-type": "plugin"

@@ -17,8 +17,8 @@ The following presumes you are running TW under node:
 
 1. In the directory for your TW, if there is not already a directory named *plugins*, create one.
 It should be a sibling of the *tiddlers* directory.
-2. Clone or download the files in this project into a subdirectory of *plugins* called *atomfeed*.
-3. Change the URL in *atomserver.tid* from `http://dullroar.com/` to your own site's URL. Note that
+2. Clone or download the files in this project into a subdirectory of *plugins* called *dullroar*.
+3. Change the URL in *dullroar/atomfeed/atomserver.tid* from `http://dullroar.com/` to your own site's URL. Note that
 the ending `/` is required.
 4. Make sure the `$:/SiteTitle` tiddler is set (in `$:/ControlPanel`, it is the field with the "Title
 of this TiddlyWiki" label).
@@ -26,8 +26,8 @@ of this TiddlyWiki" label).
 label).
 6. Make sure the `$:/status/UserName` tiddler is set (if running under node this is typically passed in
 as a parameter to the `--server` command).
-7. Change the *tiddlywiki.info* file so that the `plugins` array has `atomfeed` in it, e.g.,
-`"plugins": ["atomfeed"],`.
+7. Change the *dullroar/tiddlywiki.info* file so that the `plugins` array has `dullroar/atomfeed` in it, e.g.,
+`"plugins": ["dullroar/atomfeed"],`.
 8. Make sure the tiddlers you want in the feed are tagged (see below).
 9. Optionally make sure the tiddlers you want in the feed have a `summary` field (see below).
 
