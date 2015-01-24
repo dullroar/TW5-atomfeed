@@ -1,6 +1,6 @@
 created: 20141220215103148
 creator: Jim
-modified: 20141229145957207
+modified: 20150124151600000
 modifier: Jim
 tags: static
 title: atomfeed
@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
   	<name>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="creator" format="htmlencoded"/></$link></$list>`</name>
   </author>
   <id>urn:uuid:`<$macrocall $name="md5hashToGuid" input={{$:/SiteTitle}} />`</id>
-  <updated>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="modified" format="date" template="YYYY-MM-DDT0hh:0mm:0ss"/></$link></$list>`</updated>`
+  <updated>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="modified" format="date" template="YYYY-0MM-0DDT0hh:0mm:0ss"/></$link></$list>`</updated>`
 <$set name="exportFilter" value="[!is[system]!untagged[]!tag[static]!title[Table of Contents]!sort[modifed]]">
 {{RenderAtom}}
 </$set>

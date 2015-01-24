@@ -1,6 +1,6 @@
 created: 20141221145616722
 creator: Jim
-modified: 20141228230443904
+modified: 20150124151600000
 modifier: Jim
 module-type: macro
 tags: static
@@ -32,7 +32,7 @@ XML.escapify = function(input) {
 };
 
 XML.twDateToISO8601 = function(twDate) {
-	return twDate.substring(0, 4) + "-" + twDate.substring(4, 6) + "-" + twDate.substring(6, 8) + "T" + twDate.substring(8, 10) + ":" + twDate.substring(10, 12) + ":" + twDate.substring(12, 14);
+	return $tw.utils.formatDateString(twDate, "YYYY-0MM-0DDT0hh:0mm:0ss");
 }
 
 XML.stringify = function(data) {
@@ -48,7 +48,9 @@ XML.stringify = function(data) {
         // many bits for this.
         x += "\t\t\t<id>urn:uuid:" + md5hash.substring(0,8) + "-" + md5hash.substring(8,12) + "-" + md5hash.substring(12,16) + "-" + md5hash.substring(16,20) + "-" + md5hash.substring(20) + "</id>\n";
         x += "\t\t\t<link href='http://dullroar.com/" + element.title.replace(/ /g,"%2520") + ".html' />\n";
-        x += "\t\t\t<updated>" + XML.twDateToISO8601(element.modified) + "</updated>\n";
+		if (element.modified) {
+			x += "\t\t\t<updated>" + XML.twDateToISO8601($tw.utils.parseDate(element.modified)) + "</updated>\n";
+		}
         x += "\t\t\t<summary>";
         if(!!element.summary) {
         	x += element.summary;
