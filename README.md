@@ -2,12 +2,15 @@
 
 TiddlyWiki5 plugin to generate ATOM feed (http://www.ietf.org/rfc/rfc4287.txt).
 
-It works in the browser but its primary use case is for generating a feed for static sites
+It works in the browser (sort of) but its primary use case is for generating a feed for static sites
 using something similar to the following when running TiddlyWiki under node.js:
 
 ```
 tiddlywiki --rendertiddlers [!is[system]] statictiddler.html static text/plain  --rendertiddler atomfeed atom.xml text/plain
 ```
+
+If you want to hack it to work better for a single-file browser-based TW, see Felix
+Richter's [@makefu] approach in the comment thread [here](https://github.com/Jermolene/TiddlyWiki5/issues/677#issuecomment-74571712).
 
 The rest of this document presumes familiarity with TiddlyWiki5 (TW) and node.js (node).
 
