@@ -1,0 +1,15 @@
+modified: 20160426022104000
+created: 20160426022104000
+modifier: Sukima
+creator: Sukima
+title: $:/plugins/dullroar/atomfeed/readme
+tags: 
+
+{{$:/plugins/dullroar/atomfeed/Feed-icon.svg}}
+
+~TiddlyWiki5 plugin to generate ATOM feed (http://www.ietf.org/rfc/rfc4287.txt).
+
+It works in the browser (sort of) but its primary use case is for generating a feed for static sites
+using something similar to the following when running ~TiddlyWiki under node.js
+
+Official source can be found at https://github.com/dullroar/TW5-atomfeed

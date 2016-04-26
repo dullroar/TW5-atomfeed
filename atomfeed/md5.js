@@ -1,13 +1,14 @@
+/*\
 created: 20141228181400000
 creator: Jim
-modified: 20141228181400000
-modifier: Jim
+modified: 20160426001400000
+modifier: Sukima
 module-type: library
-title: md5.js
+title: $:/plugins/dullroar/atomfeed/md5.js
 type: application/javascript
 
-/*\
 MD5 hash function by James Taylor [@jbt], https://github.com/jbt/js-crypto.
+
 \*/
 
 /*jslint node: true, browser: true */

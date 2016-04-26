@@ -3,7 +3,7 @@ creator: Jim
 modified: 20150124151600000
 modifier: Jim
 tags: static
-title: atomfeed
+title: $:/plugins/dullroar/atomfeed/atomfeed
 type: text/vnd.tiddlywiki
 
 \define tv-wikilink-template() #$uri_encoded$
@@ -14,14 +14,14 @@ type: text/vnd.tiddlywiki
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>`{{$:/SiteTitle}}`</title>
   <subtitle>`{{$:/SiteSubtitle}}`</subtitle>
-  <link href="`{{atomserver}}`atom.xml" rel="self" />
-  <link href="`{{atomserver}}`" />
+  <link href="`{{$:/config/atomserver}}`atom.xml" rel="self" />
+  <link href="`{{$:/config/atomserver}}`" />
   <author>
   	<name>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="creator" format="htmlencoded"/></$link></$list>`</name>
   </author>
   <id>urn:uuid:`<$macrocall $name="md5hashToGuid" input={{$:/SiteTitle}} />`</id>
   <updated>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="modified" format="date" template="YYYY-0MM-0DDT0hh:0mm:0ss"/></$link></$list>`</updated>`
-<$set name="exportFilter" value="[!is[system]!untagged[]!tag[static]!title[Table of Contents]!sort[modifed]]">
-{{RenderAtom}}
+<$set name="exportFilter" value={{$:/config/atomfilter}}>
+{{$:/plugins/dullroar/atomfeed/RenderAtom}}
 </$set>
 `</feed>`
