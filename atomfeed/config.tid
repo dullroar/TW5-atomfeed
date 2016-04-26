@@ -1,0 +1,9 @@
+modified: 20160426021325000
+created: 20160426021325000
+modifier: Sukima
+creator: Sukima
+title: $:/plugins/dullroar/atomfeed/config
+tags: 
+
+|Canonical feed URL |<$edit-text tiddler="$:/config/atomserver" tag="input"/> |
+|>| //Base URL path with out the trailing `/atom.xml`//|
