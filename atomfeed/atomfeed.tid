@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
   </author>
   <id>urn:uuid:`<$macrocall $name="md5hashToGuid" input={{$:/SiteTitle}} />`</id>
   <updated>`<$list filter="[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]"><$link><$view field="modified" format="date" template="YYYY-0MM-0DDT0hh:0mm:0ss"/></$link></$list>`</updated>`
-<$set name="exportFilter" value="[!is[system]!untagged[]!tag[static]!title[Table of Contents]!sort[modifed]]">
+<$set name="exportFilter" value={{$:/config/atomfilter}}>
 {{$:/plugins/dullroar/atomfeed/RenderAtom}}
 </$set>
 `</feed>`

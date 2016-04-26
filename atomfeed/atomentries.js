@@ -23,7 +23,10 @@ var md5 = require("$:/plugins/dullroar/atomfeed/md5");
 exports.name = "atomentries";
 
 exports.params = [
-	{name: "filter"}
+	{
+		name: "filter",
+		default: "[!is[system]!untagged[]!tag[static]!title[Table of Contents]!sort[modifed]]"
+	}
 ];
 
 var XML = {};
