@@ -4,7 +4,7 @@ extension: .xml
 modified: 20141229145352496
 modifier: Jim
 tags: static $:/tags/Exporter
-title: RenderAtom
+title: $:/plugins/dullroar/atomfeed/RenderAtom
 type: text/vnd.tiddlywiki
 
 \define renderContent()

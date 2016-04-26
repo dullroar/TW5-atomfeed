@@ -5,13 +5,13 @@ modified: 20160426001500000
 modifier: Sukima
 module-type: macro
 tags: 
-title: md5hashToGuid
+title: $:/plugins/dullroar/atomfeed/md5hashToGuid.js
 type: application/javascript
 
 Macro to create an MD5 hash of a string and format it as a GUID.
 
 \*/
-var md5 = require("md5");
+var md5 = require("$:/plugins/dullroar/atomfeed/md5");
 
 (function(){
 

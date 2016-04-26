@@ -5,14 +5,14 @@ modified: 20160426001200000
 modifier: Sukima
 module-type: macro
 tags: static
-title: atomentries.js
+title: $:/plugins/dullroar/atomfeed/atomentries.js
 type: application/javascript
 
 Macro to output tiddlers matching a filter to ATOM entries.
 http://www.ietf.org/rfc/rfc4287.txt
 
 \*/
-var md5 = require("md5");
+var md5 = require("$:/plugins/dullroar/atomfeed/md5");
 
 (function(){
 
@@ -48,7 +48,7 @@ XML.stringify = function(data) {
         // id semantics that the ATOM spec requires. Other crypto hashes like SHA return too
         // many bits for this.
         x += "\t\t\t<id>urn:uuid:" + md5hash.substring(0,8) + "-" + md5hash.substring(8,12) + "-" + md5hash.substring(12,16) + "-" + md5hash.substring(16,20) + "-" + md5hash.substring(20) + "</id>\n";
-		var server = $tw.wiki.getTiddlerText("atomserver", "");
+		var server = $tw.wiki.getTiddlerText("$:/config/atomserver", "");
 		if (server.slice(-1) !== "/") {
 			server += "/";
 		}
