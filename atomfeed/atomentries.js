@@ -1,15 +1,16 @@
+/*\
 created: 20141221145616722
 creator: Jim
-modified: 20150124151600000
-modifier: Jim
+modified: 20160426001200000
+modifier: Sukima
 module-type: macro
 tags: static
 title: atomentries.js
 type: application/javascript
 
-/*\
 Macro to output tiddlers matching a filter to ATOM entries.
 http://www.ietf.org/rfc/rfc4287.txt
+
 \*/
 var md5 = require("md5");
 

@@ -1,14 +1,15 @@
+/*\
 created: 20141229142330769
 creator: Jim
-modified: 20141229145413839
-modifier: Jim
+modified: 20160426001500000
+modifier: Sukima
 module-type: macro
 tags: 
 title: md5hashToGuid
 type: application/javascript
 
-/*\
 Macro to create an MD5 hash of a string and format it as a GUID.
+
 \*/
 var md5 = require("md5");
 
