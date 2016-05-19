@@ -10,11 +10,13 @@ Encapsulating class for constructing atom feeds
 /**
  * @module Atomfeed
  */
-(function() {
-  var uuidHasher = require("$:/plugins/dullroar/atomfeed/md5hashToGuid");
+(function() { // jshint ignore:line
+  var uuidHasher = require('$:/plugins/dullroar/atomfeed/md5hashToGuid');
 
+  // jshint ignore:start
   var LAST_UPDATED_FILTER =
     '[!is[system]!has[draft.of]!untagged[]!tag[static]!is[tag]!sort[modified]limit[1]]';
+  // jshint ignore:end
 
   function toISODate(twDateString) {
     if (!twDateString) { return ''; }
@@ -77,14 +79,14 @@ Encapsulating class for constructing atom feeds
       this.wiki.getTiddler(this.wiki.filterTiddlers(LAST_UPDATED_FILTER)[0]);
     var sitetitle = this.wiki.getTiddlerText('$:/SiteTitle');
     return {
-      title:    this.renderText(sitetitle),
-      subtitle: this.renderText(this.wiki.getTiddlerText('$:/SiteSubtitle')),
+      title:    sitetitle,
+      subtitle: this.wiki.getTiddlerText('$:/SiteSubtitle'),
       feedhref: pathJoin([atomserver, 'atom.xml']),
       sitehref: atomserver,
       author:   lastUpdatedTiddler.fields.creator,
       updated:  toISODate(lastUpdatedTiddler.fields.modified),
       uuid:     uuidHasher.run(sitetitle),
-    }
+    };
   };
 
   /**
@@ -100,7 +102,9 @@ Encapsulating class for constructing atom feeds
       updated: toISODate(tiddler.getFieldString('modified')),
       uuid: uuidHasher.run(title),
       href: pathJoin([this.metadata.sitehref, toPermalink(title)]),
-      statichref: pathJoin([this.metadata.sitehref, 'static', toFileName(title)]),
+      statichref: pathJoin([
+        this.metadata.sitehref, 'static', toFileName(title)
+      ]),
       summary: tiddler.getFieldString('summary') ||
         truncateWords(tiddler.getFieldString('text')),
       author: tiddler.getFieldString('modifier') ||
@@ -119,8 +123,8 @@ Encapsulating class for constructing atom feeds
   AtomSmasher.prototype.atomFeed = function atomHeader() {
     return $tw.utils.DomBuilder('feed', this.document)
       .attr('xmlns', 'http://www.w3.org/2005/Atom')
-      .add('title').text(this.metadata.title).end()
-      .add('subtitle').text(this.metadata.subtitle).end()
+      .add('title').renderText(this.metadata.title).end()
+      .add('subtitle').renderText(this.metadata.subtitle).end()
       .add('link')
         .attr('href', this.metadata.feedhref)
         .attr('rel', 'self')
@@ -191,7 +195,9 @@ Encapsulating class for constructing atom feeds
       .add('summary').text(data.summary).end()
       .add('content')
         .attr('type', 'xhtml')
-        .add(this.renderTiddler(data.title))
+        .renderTiddler(data.title)
+          .attr('xmlns', 'http://www.w3.org/1999/xhtml')
+        .end()
       .end()
       .add('author')
         .add('name').text(data.author).end()
