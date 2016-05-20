@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/dullroar/atomfeed/dombuilder.js
 type: application/javascript
-module-type: utils
+module-type: library
 
 Micro DSL for DOM creation and stringification.
 
@@ -9,9 +9,21 @@ Micro DSL for DOM creation and stringification.
 
 /**
  * @module Atomfeed
+ * @author Devin Weaver
  */
-(function() {
+/*jshint node: true, browser: true */
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = factory();
+  } else {
+    root.DomBuilder = factory();
+  }
+})(this, function() {
   /**
+   * Helper utility to construct complex DOM nodes easily.
+   *
    * @class DomBuilder
    * @constructor
    * @param {DomBuilder|DOMElement|String} [root=div] A DOM element or string.
@@ -52,7 +64,7 @@ Micro DSL for DOM creation and stringification.
    * @public
    */
   DomBuilder.prototype.add = function add(element) {
-    var el = this._addElement(element)
+    var el = this._addElement(element);
     return (element instanceof DomBuilder) ? this : el;
   };
 
@@ -63,7 +75,8 @@ Micro DSL for DOM creation and stringification.
    * @public
    */
   DomBuilder.prototype.text = function text(content) {
-    this._addElement(this.document.createTextNode($tw.utils.htmlEncode(content)));
+    var node = this.document.createTextNode($tw.utils.htmlEncode(content));
+    this._addElement(node);
     return this;
   };
 
@@ -162,5 +175,5 @@ Micro DSL for DOM creation and stringification.
    * @private
    */
 
-  $tw.utils.DomBuilder = module.exports = DomBuilder;
-})();
+  return DomBuilder;
+});

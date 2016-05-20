@@ -6,19 +6,18 @@ module-type: macro
 Macro to output tiddlers matching a filter to JSON
 
 \*/
+
+/*jshint node: true, browser: true */
+/*global $tw: false */
 (function() {
-  var AtomSmasher = require("$:/plugins/dullroar/atomfeed/atomsmasher");
+  var AtomSmasher = require('$:/plugins/dullroar/atomfeed/atomsmasher');
 
-  /*jshint node: true, browser: true */
-  /*global $tw: false */
-  "use strict";
-
-  exports.name = "atomtiddlers";
+  exports.name = 'atomtiddlers';
 
   exports.params = [
     {
-      name: "filter",
-      default: "[!is[system]!has[draft.of]!sort[modified]]"
+      name: 'filter',
+      default: '[!is[system]!has[draft.of]!sort[modified]]'
     }
   ];
 
