@@ -24,10 +24,8 @@ Encapsulating class for constructing atom feeds
     return $tw.utils.formatDateString(twDate, "YYYY-0MM-0DDT0hh:0mm:0ss");
   }
 
-  function pathJoin(parts, sep){
-    var separator = sep || '/';
-    var replace   = new RegExp(separator+'{1,}', 'g');
-    return parts.join(separator).replace(replace, separator);
+  function pathJoin(parts){
+    return parts.join('/').replace(/(:\/)*\/{1,}/g, '$1/');
   }
 
   function domBuilderToXml(domBuilder) {
