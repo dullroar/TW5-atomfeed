@@ -140,35 +140,6 @@ Encapsulating class for constructing atom feeds
   };
 
   /**
-   * Render a tiddler into a widgetNode
-   *
-   * @method renderTiddler
-   * @param {String} title tiddler title
-   * @return {DomBuilder}
-   * @private
-   */
-  AtomSmasher.prototype.renderTiddler = function renderTiddler(title) {
-    var widgetNode = this.wiki.makeWidget(this.wiki.parseTiddler(title));
-    var container = $tw.utils.DomBuilder('div', this.document)
-      .attr('xmlns', 'http://www.w3.org/1999/xhtml')
-      .toDOM();
-    widgetNode.render(container, null);
-    return $tw.utils.DomBuilder(container, this.document);
-  };
-
-  /**
-   * Render arbitrary TiddlyWiki text.
-   *
-   * @method renderText
-   * @param {String} test the TiddlyWiki text to render
-   * @return {String} the rendered text
-   * @private
-   */
-  AtomSmasher.prototype.renderText = function renderText(text) {
-    return this.wiki.renderText('text/plain', 'text/vnd.tiddlywiki', text);
-  };
-
-  /**
    * Return a DomBuilder for a specific ATOM entry from a Tiddler.
    *
    * @method atomEntry
