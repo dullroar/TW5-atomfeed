@@ -24,10 +24,8 @@ Encapsulating class for constructing atom feeds
     return $tw.utils.formatDateString(twDate, "YYYY-0MM-0DDT0hh:0mm:0ss");
   }
 
-  function pathJoin(parts, sep){
-    var separator = sep || '/';
-    var replace   = new RegExp(separator+'{1,}', 'g');
-    return parts.join(separator).replace(replace, separator);
+  function pathJoin(parts){
+    return parts.join('/').replace(/(:\/)*\/{1,}/g, '$1/');
   }
 
   function domBuilderToXml(domBuilder) {
@@ -139,35 +137,6 @@ Encapsulating class for constructing atom feeds
       .end()
       .add('id').text(this.metadata.uuid).end()
       .add('updated').text(this.metadata.updated).end();
-  };
-
-  /**
-   * Render a tiddler into a widgetNode
-   *
-   * @method renderTiddler
-   * @param {String} title tiddler title
-   * @return {DomBuilder}
-   * @private
-   */
-  AtomSmasher.prototype.renderTiddler = function renderTiddler(title) {
-    var widgetNode = this.wiki.makeWidget(this.wiki.parseTiddler(title));
-    var container = $tw.utils.DomBuilder('div', this.document)
-      .attr('xmlns', 'http://www.w3.org/1999/xhtml')
-      .toDOM();
-    widgetNode.render(container, null);
-    return $tw.utils.DomBuilder(container, this.document);
-  };
-
-  /**
-   * Render arbitrary TiddlyWiki text.
-   *
-   * @method renderText
-   * @param {String} test the TiddlyWiki text to render
-   * @return {String} the rendered text
-   * @private
-   */
-  AtomSmasher.prototype.renderText = function renderText(text) {
-    return this.wiki.renderText('text/plain', 'text/vnd.tiddlywiki', text);
   };
 
   /**

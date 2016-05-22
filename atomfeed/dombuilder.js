@@ -75,7 +75,7 @@ Micro DSL for DOM creation and stringification.
    * @public
    */
   DomBuilder.prototype.text = function text(content) {
-    var node = this.document.createTextNode($tw.utils.htmlEncode(content));
+    var node = this.document.createTextNode(content);
     this._addElement(node);
     return this;
   };
