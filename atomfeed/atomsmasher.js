@@ -36,10 +36,6 @@ Encapsulating class for constructing atom feeds
     return output;
   }
 
-  function truncateWords(text, words) {
-    return text.split(/\s/, words || 20).join(' ');
-  }
-
   function toPermalink(title) {
     return '#' + encodeURIComponent(title);
   }
@@ -103,8 +99,7 @@ Encapsulating class for constructing atom feeds
       statichref: pathJoin([
         this.metadata.sitehref, 'static', toFileName(title)
       ]),
-      summary: tiddler.getFieldString('summary') ||
-        truncateWords(tiddler.getFieldString('text')),
+      summary: tiddler.getFieldString('summary'),
       author: tiddler.getFieldString('modifier') ||
         tiddler.getFieldString('creator') ||
         this.metadata.author
@@ -161,7 +156,11 @@ Encapsulating class for constructing atom feeds
       .end()
       .add('id').text(data.uuid).end()
       .add('updated').text(data.updated).end()
-      .add('summary').text(data.summary).end()
+      .bind(function() {
+        if (data.summary) {
+          this.add('summary').text(data.summary);
+        }
+      })
       .add('content')
         .attr('type', 'xhtml')
         .renderTiddler(data.title)

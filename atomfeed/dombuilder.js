@@ -103,6 +103,26 @@ Micro DSL for DOM creation and stringification.
   };
 
   /**
+   * Execute a callback and add it's result to the chain.
+   *
+   * Within the callback you can use `this` as if the chain was continuing
+   * inside. However, the return vaue is ignorred and the DomBuilder that
+   * `bind` was called on will be returned meaning `end()` wil not need to end
+   * this node.
+   *
+   * @method bind
+   * @param {Function} callback called with `this` as the current DomBuilder
+   * node. Return value is ignored.
+   * @return {DomBuilder} this DomBuilder in the hierarchy `.end()` not needed.
+   * @chainable
+   * @public
+   */
+  DomBuilder.prototype.bind = function bind(callback) {
+    callback.call(this);
+    return this;
+  };
+
+  /**
    * @method toDOM
    * @param {DOMDocument} [document=this.document] the document object to
    * propagate down the recursion chain
