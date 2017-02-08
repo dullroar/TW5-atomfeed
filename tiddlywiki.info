@@ -1,0 +1,6 @@
+{
+  "build": {
+    "readme": [
+      "--rendertiddler", "$:/plugins/dullroar/atomfeed/readme", "README.md", "text/html"]
+  }
+}

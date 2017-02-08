@@ -1,0 +1,23 @@
+{
+  "name": "tw5-atomfeed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TiddlyWiki5 plugin to generate ATOM feed (http://www.ietf.org/rfc/rfc4287.txt).",
+  "scripts": {
+    "start": "tiddlywiki ./ --server",
+    "readme": "tiddlywiki --output ./ --build readme"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dullroar/TW5-atomfeed.git"
+  },
+  "author": "Jim Lehmer (@dullroar)",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/dullroar/TW5-atomfeed/issues"
+  },
+  "homepage": "https://github.com/dullroar/TW5-atomfeed#readme",
+  "devDependencies": {
+    "tiddlywiki": "^5.1.13"
+  }
+}
