@@ -1,94 +1,25 @@
-# TW5-atomfeed
-
-TiddlyWiki5 plugin to generate ATOM feed (http://www.ietf.org/rfc/rfc4287.txt).
-
-It works in the browser (sort of) but its primary use case is for generating a feed for static sites
-using something similar to the following when running TiddlyWiki under node.js:
-
-```
-tiddlywiki --rendertiddlers [!is[system]] statictiddler.html static text/plain  --rendertiddler atomfeed atom.xml text/plain
-```
-
-If you want to hack it to work better for a single-file browser-based TW, see Felix
-Richter's [@makefu] approach in the comment thread [here](https://github.com/Jermolene/TiddlyWiki5/issues/677#issuecomment-74571712).
-
-The rest of this document presumes familiarity with TiddlyWiki5 (TW) and node.js (node).
-
-## Setup
-
-The following presumes you are running TW under node:
-
-1. In the directory for your TW, if there is not already a directory named *plugins*, create one.
-It should be a sibling of the *tiddlers* directory.
-2. Clone or download the files in this project into a subdirectory of *plugins* called *dullroar*.
-3. Change the URL in *dullroar/atomfeed/atomserver.tid* from `http://dullroar.com/` to your own site's URL. Note that
-the ending `/` is required.
-4. Make sure the `$:/SiteTitle` tiddler is set (in `$:/ControlPanel`, it is the field with the "Title
-of this TiddlyWiki" label).
-5. Optionally set the `$:/SiteSubtitle` tiddler (in `$:/ControlPanel`, it is the field with the "Subtitle"
-label).
-6. Make sure the `$:/status/UserName` tiddler is set (if running under node this is typically passed in
-as a parameter to the `--server` command).
-7. Change the *dullroar/tiddlywiki.info* file so that the `plugins` array has `dullroar/atomfeed` in it, e.g.,
-`"plugins": ["dullroar/atomfeed"],`.
-8. Make sure the tiddlers you want in the feed are tagged (see below).
-9. Optionally make sure the tiddlers you want in the feed have a `summary` field (see below).
-
-## Working With Tiddlers
-
-`atomfeed` uses the following TW filter to select tiddlers for the feed:
-
-```
-[!is[system]!untagged[]!tag[static]!title[Table of Contents]!sort[modifed]]
-```
-
-This basically says:
-
-1. Do not include "system" tiddlers.
-2. Do not include tiddlers without a tag.
-3. Do not include tiddlers with a tag of "static" (I use tiddlers tagged "static" to hold assets for
-my static web site).
-4. Do not include a tiddler entitled "Table of Contents".
-5. Sort by modified date in descending order (currently there is a bug where this doesn't seem to be
-happening).
-
-So, the net of all that is that any tiddlers you create that are tagged (and with something other than
-"static") will be placed in the feed.
-
-In addition, if you create a field on your tiddlers called `summary`, then that will be used for the
-summary text for the ATOM entry for that tiddler. Otherwise it will use the first 20 "words" in the
-tiddler text (crude).
-
-**Note:** At this time including the entire tiddler text in the feed entry is not supported.
-
-## Generating a Feed
-
-To generate the feed for a static site, I use a command similar to (all on one line):
-
-```
-tiddlywiki --rendertiddlers [!is[system]!tag[static]] statictiddler.html static text/plain --rendertiddler $:/core/templates/static.template.css static/static.css text/plain --rendertiddler atomfeed atom.xml text/plain 
-```
-
-If you want to use this in-browser, you can build a TW using the following command under node:
-
-```
-tiddlywiki --build index
-```
-
-The resulting *index.html* file in the *output* directory will have the plugin installed. You can navigate to
-the *atomfeed* tiddler under Shadows, or once you've opened the file with `index.html#atomfeed`.
-
-Or you can simply run the TW under node:
-
-```
-tiddlywiki --verbose --server 8080 $:/core/save/lazy-images text/plain text/html Jim
-```
-
-And then navigate directly to the feed tiddler using http://localhost:8080/#atomfeed.
-
-## Acknowledgments
-
-Built for TiddlyWiki5 by Jeremy Ruston [@Jermolene], https://github.com/Jermolene/TiddlyWiki5, possibly
-the coolest thing you can do with a browser.
-
-This plugin uses the MD5 hash function by James Taylor [@jbt], https://github.com/jbt/js-crypto.
+<img src="data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20width%3D%22128px%22%20height%3D%22128px%22%20id%3D%22RSSicon%22%20viewBox%3D%220%200%20256%20256%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20x1%3D%220.085%22%20y1%3D%220.085%22%20x2%3D%220.915%22%20y2%3D%220.915%22%20id%3D%22RSSg%22%3E%0A%3Cstop%20offset%3D%220.0%22%20stop-color%3D%22%23E3702D%22%2F%3E%3Cstop%20offset%3D%220.1071%22%20stop-color%3D%22%23EA7D31%22%2F%3E%0A%3Cstop%20offset%3D%220.3503%22%20stop-color%3D%22%23F69537%22%2F%3E%3Cstop%20offset%3D%220.5%22%20stop-color%3D%22%23FB9E3A%22%2F%3E%0A%3Cstop%20offset%3D%220.7016%22%20stop-color%3D%22%23EA7C31%22%2F%3E%3Cstop%20offset%3D%220.8866%22%20stop-color%3D%22%23DE642B%22%2F%3E%0A%3Cstop%20offset%3D%221.0%22%20stop-color%3D%22%23D95B29%22%2F%3E%0A%3C%2FlinearGradient%3E%0A%3C%2Fdefs%3E%0A%3Crect%20width%3D%22256%22%20height%3D%22256%22%20rx%3D%2255%22%20ry%3D%2255%22%20x%3D%220%22%20y%3D%220%22%20fill%3D%22%23CC5D15%22%2F%3E%0A%3Crect%20width%3D%22246%22%20height%3D%22246%22%20rx%3D%2250%22%20ry%3D%2250%22%20x%3D%225%22%20y%3D%225%22%20fill%3D%22%23F49C52%22%2F%3E%0A%3Crect%20width%3D%22236%22%20height%3D%22236%22%20rx%3D%2247%22%20ry%3D%2247%22%20x%3D%2210%22%20y%3D%2210%22%20fill%3D%22url(%23RSSg)%22%2F%3E%0A%3Ccircle%20cx%3D%2268%22%20cy%3D%22189%22%20r%3D%2224%22%20fill%3D%22%23FFF%22%2F%3E%0A%3Cpath%20d%3D%22M160%20213h-34a82%2082%200%200%200%20-82%20-82v-34a116%20116%200%200%201%20116%20116z%22%20fill%3D%22%23FFF%22%2F%3E%0A%3Cpath%20d%3D%22M184%20213A140%20140%200%200%200%2044%2073%20V%2038a175%20175%200%200%201%20175%20175z%22%20fill%3D%22%23FFF%22%2F%3E%0A%3C%2Fsvg%3E%0A"><p>TiddlyWiki5 plugin to generate ATOM feed (<a class="tc-tiddlylink-external" href="http://www.ietf.org/rfc/rfc4287.txt" rel="noopener noreferrer" target="_blank">http://www.ietf.org/rfc/rfc4287.txt</a>).</p><p>This plugin is meant to be use to generate a static ATOM feed file. This means it is intended to be part of <a class="tc-tiddlylink-external" href="http://tiddlywiki.com/#Using%20TiddlyWiki%20on%20Node.js" rel="noopener noreferrer" target="_blank">TiddlyWiki's Node.js method</a> build process.</p><p>Official source can be found at <a class="tc-tiddlylink-external" href="https://github.com/dullroar/TW5-atomfeed" rel="noopener noreferrer" target="_blank">https://github.com/dullroar/TW5-atomfeed</a></p><h2 class="">Why Node?</h2><p>The use case for an ATOM feed is to to offer news reader software a single file they can download and then aggregate updates to those files to the users.</p><p>TiddlyWiki is served (or saved on a file system) as a single HTML file.</p><p>These two are two very separate concepts and there is no technical way for the ATOM spec to parse HTML with <a class="tc-tiddlylink tc-tiddlylink-missing" href="#JavaScript">JavaScript</a> to construct the XML required by the news reader. It must be a separate file.</p><p>And so this plugin will typically remain dormant in the single page TiddlyWiki version but can be used with the Node.js version.</p><h2 class="">How to install</h2><p>1.  Download/clone this repository.
+2.  Copy the <code>atomfeed</code> directory to your wiki's <code>plugins</code> folder.</p><p>The file heiarchy would look like this:</p><pre><code>wiki/
++-- tiddlywiki.info
++-- tiddlers/
+|   +-- ... (all the tiddlers)
+\-- plugins/
+    \-- atomfeeds/
+        +-- atom-template.tid
+        +-- atomexport.tid
+        +-- atomfeed-icon.svg.tid
+        +-- atomsmasher.js
+        +-- atomtiddlers.js
+        +-- config.tid
+        +-- dombuilder.js
+        +-- md5.js
+        +-- md5hashToGuid.js
+        +-- plugin.info
+        +-- readme.tid
+        \-- tw-dombuilder.js</code></pre><h2 class="">How to configure</h2><p>Run your TiddlyWiki as you normally would (likely as a server): <code>tiddlywiki wiki --server</code>.</p><p>Open the settings tab and there should be a an <strong>Atom Feeds</strong> tab under the <strong>Info</strong> tab section.</p><p>Here you can change the following:</p><dl><dt>Canonical feed URL</dt><dd>The URL prefix to be appended to all links generated in the ATOM feed output.</dd><dt>Included Tiddlers</dt><dd>The filter used to currate the list of tiddlers you want to include in the ATOM feed output.</dd></dl><h2 class="">How to use</h2><p>To output an <code>atom.xml</code> file use this command:</p><pre><code>tiddlywiki wiki --rendertiddler '$:/plugins/dullroar/atomfeed/atom.template.xml' 'atom.xml' 'text/plain'</code></pre><p>You can add the following to your <code>tiddlywiki.info</code> to make the command easier:</p><pre><code>{
+  &quot;build&quot;: {
+    &quot;feed&quot;: [
+      &quot;--rendertiddler&quot;, &quot;$:/plugins/dullroar/atomfeed/atom.template.xml&quot;, &quot;atom.xml&quot;, &quot;text/plain&quot;
+    ]
+  }
+}</code></pre><p>And then simply run:</p><pre><code>tiddlywiki wiki --build feed</code></pre>
