@@ -93,6 +93,7 @@ Encapsulating class for constructing atom feeds
     var title = tiddler.getFieldString('title');
     return {
       title: title,
+      published: toISODate(tiddler.getFieldString('created')),
       updated: toISODate(tiddler.getFieldString('modified')),
       uuid: uuidHasher.run(title),
       href: pathJoin([this.metadata.sitehref, toPermalink(title)]),
@@ -155,6 +156,7 @@ Encapsulating class for constructing atom feeds
         .attr('href', data.statichref)
       .end()
       .add('id').text(data.uuid).end()
+      .add('published').text(data.published).end()
       .add('updated').text(data.updated).end()
       .bind(function() {
         if (data.summary) {
